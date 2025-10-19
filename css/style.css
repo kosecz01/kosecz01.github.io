@@ -1,0 +1,251 @@
+/* ===== Global Styles ===== */
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa;
+  color: #333;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ===== Fixed Header ===== */
+header {
+  background: #222;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== Navigation ===== */
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a.active,
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Main Content ===== */
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 200px 1rem 100px 1rem; /* space for fixed header & footer */
+  text-align: center;
+}
+
+.intro img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: #0077ff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.2s ease;
+}
+
+.btn:hover {
+  background: #005fcc;
+}
+
+/* ===== Images ===== */
+img {
+  border-radius: 50%;
+}
+
+/* ===== Fixed Footer ===== */
+footer {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== Projects Section ===== */
+.projects article {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* ===== Education Page ===== */
+.education-entry {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: white;
+  padding: 1rem;
+  margin: 1rem auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  max-width: 800px;
+  gap: 1.5rem;
+}
+
+.school-logo {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.education-details {
+  text-align: left;
+}
+
+.education-details h2 {
+  margin: 0 0 0.5rem 0;
+}
+
+/* ===== Contact Page ===== */
+.contact-container {
+  display: flex;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 140px auto 2rem auto;
+  padding: 1rem;
+  align-items: stretch;
+  text-align: left;
+}
+
+.contact-info,
+.contact-form {
+  flex: 1;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.social-icons {
+  margin-top: 1rem;
+}
+
+.social-icons a {
+  margin-right: 1rem;
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.08);
+}
+
+.social-icons img {
+  width: 40px;
+  height: 40px;
+}
+
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.contact-form button {
+  background-color: #0077ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  align-self: center;
+}
+
+.contact-form button:hover {
+  background-color: #005fcc;
+  transform: scale(1.03);
+}
+
+.contact-form button:active {
+  transform: scale(0.98);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .contact-container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .contact-info,
+  .contact-form {
+    width: 100%;
+  }
+
+  .social-icons img {
+    width: 48px;
+    height: 48px;
+  }
+
+  main {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+}
+
+@media (max-width: 600px) {
+  .education-entry {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .school-logo {
+    width: 150px;
+    margin-bottom: 0.5rem;
+  }
+}
