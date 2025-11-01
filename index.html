@@ -15,6 +15,7 @@
         <li><a href="education.html">Education</a></li>
         <li><a href="experience.html">Experience</a></li>
         <li><a href="projects.html">Projects</a></li>
+        <li><a href="skills.html">Skills</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
@@ -22,11 +23,33 @@
 
   <main>
     <section class="intro">
-      <img src="img/me.jpeg" alt="Profile Photo">
+      <img src="img/me.jpeg" alt="Profile Photo" id="profile-pic">
+      <div id="bubbles"></div>
       <h2>&lt;hello&gt; Hello World, I’m Zsolt! &lt;/hello&gt;</h2>
       <p>I’m a passionate web developer who is new to this world and is looking to explore the possibilities.</p>
     </section>
   </main>
+
+<script>
+  const pic = document.getElementById("profile-pic");
+  const bubblesContainer = document.getElementById("bubbles");
+  const messages = ["Hello!", "My name is Zsolt!", "I would like to be your web developer!"];
+
+  pic.addEventListener("click", () => {
+    pic.classList.add("clicked");
+    bubblesContainer.innerHTML = "";
+
+    messages.forEach((msg, index) => {
+      setTimeout(() => {
+        const bubble = document.createElement("div");
+        bubble.className = `bubble bubble-${index + 1}`;
+        bubble.textContent = msg;
+        bubblesContainer.appendChild(bubble);
+        setTimeout(() => bubble.classList.add("show"), 50);
+      }, index * 800);
+    });
+  });
+</script>
 
   <footer>
     <p>&copy; 2025 Zsolt Koseczky</p>
