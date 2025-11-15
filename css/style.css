@@ -37,16 +37,30 @@ nav ul {
 }
 
 nav ul li a {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  font-weight: 600;
   color: white;
+  backdrop-filter: blur(4px);
   text-decoration: none;
-  font-weight: bold;
-  transition: color 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
 }
 
-nav ul li a.active,
 nav ul li a:hover {
-  color: #ffeb3b;
-  text-decoration: underline;
+  background: #ffeb3b;
+  color: #003f7f;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+nav ul li a.active {
+  background: #ffeb3b;
+  color: #003f7f;
+  font-weight: 700;
+  transform: translateY(-2px);
 }
 
 /* ===== Main Content ===== */
@@ -96,30 +110,14 @@ main {
   transform: translateY(0);
 }
 
-/* ===== Specific Bubble Positions ===== */
 #bubbles {
   position: relative;
   display: inline-block;
 }
 
-/* Bubble 1 - top right */
-.bubble-1 {
-  top: -250px;
-  left: -100px;
-}
-
-/* Bubble 2 - middle right */
-.bubble-2 {
-  top: -163px;
-  left: -50px;
-  transform: translateY(-50%);
-}
-
-/* Bubble 3 - bottom right */
-.bubble-3 {
-  top: -75px;
-  left: -100px;
-}
+.bubble-1 { top: -250px; left: -100px; }
+.bubble-2 { top: -163px; left: -50px; transform: translateY(-50%); }
+.bubble-3 { top: -75px; left: -100px; }
 
 /* ===== Buttons ===== */
 .btn {
@@ -156,7 +154,7 @@ footer {
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.25);
 }
 
-/* ===== Projects & Experience Sections ===== */
+/* ===== Projects ===== */
 .projects article {
   background: white;
   padding: 1.5rem;
@@ -165,7 +163,6 @@ footer {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition: transform 0.2s ease;
 }
-
 .projects article:hover {
   transform: scale(1.02);
 }
@@ -184,14 +181,12 @@ footer {
   gap: 1.5rem;
   transition: transform 0.2s ease;
 }
-
 .education-entry:hover {
   transform: scale(1.02);
 }
 
 .school-logo {
   width: 100px;
-  height: auto;
   border-radius: 8px;
   object-fit: cover;
 }
@@ -199,7 +194,6 @@ footer {
 .education-details {
   text-align: left;
 }
-
 .education-details h2 {
   margin: 0 0 0.5rem 0;
   color: #0077ff;
@@ -225,7 +219,7 @@ footer {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* Chat Bubble */
+/* Chat Bubble Above Contact Info */
 .contact-info::before {
   content: "💬 Let's connect!";
   display: block;
@@ -297,26 +291,68 @@ footer {
 }
 
 /* ===== Skills Page ===== */
-.skills-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
+
+/* Section Title */
+.skill-section-title {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+  padding-left: 0.5rem;
+}
+
+/* Skills Grid */
+.skills-grid {
   margin-top: 2rem;
 }
 
-.skill-badge {
-  background: linear-gradient(135deg, #00c6ff, #0077ff);
-  color: white;
-  padding: 1rem 1.5rem;
-  border-radius: 50px;
-  font-weight: 600;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-  transition: transform 0.2s ease;
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
 }
 
-.skill-badge:hover {
-  transform: translateY(-5px);
+/* Skill Cards */
+.skill-card {
+  background: #0077ff;
+  color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  cursor: default;
+  position: relative;
+}
+
+/* Hover */
+.skill-card:hover {
+  background: #ffeb3b;
+  color: #003f7f;
+  transform: scale(1.07);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+/* Fade-in Animation */
+.skill-card {
+  opacity: 0;
+  animation: fadeIn 0.6s ease forwards;
+}
+.skill-card:nth-child(odd) { animation-delay: 0.1s; }
+.skill-card:nth-child(even) { animation-delay: 0.2s; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* ===== Responsive ===== */
@@ -325,21 +361,10 @@ footer {
     flex-direction: column;
     padding: 1rem;
   }
-
-  .contact-info,
-  .contact-form {
-    width: 100%;
-  }
-
   main {
     padding-top: 140px;
     padding-bottom: 140px;
   }
-
-  .intro img.clicked {
-    transform: none;
-  }
-
   .bubble {
     left: 0 !important;
     right: 0 !important;
@@ -353,62 +378,12 @@ footer {
     flex-direction: column;
     text-align: center;
   }
-
   .school-logo {
     width: 120px;
     margin-bottom: 0.5rem;
   }
-
   .social-icons img {
     width: 44px;
     height: 44px;
   }
-}
-
-/* ===== Skills Page Enhancements ===== */
-.skills-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-  padding: 0 1rem;
-}
-
-.skill-card {
-  background: linear-gradient(135deg, #00c6ff, #0077ff);
-  color: white;
-  padding: 1.2rem 1rem;
-  border-radius: 20px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  text-align: center;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-  transition: all 0.3s ease;
-  cursor: default;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Hover animation */
-.skill-card:hover {
-  transform: translateY(-10px) scale(1.05);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
-}
-
-/* Optional: glowing effect */
-.skill-card::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
-  transform: rotate(45deg) scale(0);
-  transition: transform 0.5s ease;
-  pointer-events: none;
-}
-
-.skill-card:hover::after {
-  transform: rotate(45deg) scale(1);
 }
