@@ -7,9 +7,46 @@ body {
   color: #333;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
+/* ===== Falling Shapes (Randomized) ===== */
+.falling-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none; /* shapes won't block clicks */
+  z-index: -1; /* keep behind everything */
 }
+
+.shape {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: #ffeb3b;
+  opacity: 0.7;
+  border-radius: 6px;
+  animation: fall 8s linear infinite;
+  transform: rotate(45deg); /* diagonal diamond look */
+}
+
+/* Randomize sizes & positions */
+.shape:nth-child(odd) { background: #0077ff; }
+.shape:nth-child(even) { background: #00c6ff; }
+.shape:nth-child(3n) { background: #ff9800; }
+.shape:nth-child(4n) { background: #9c27b0; }
+
+@keyframes fall {
+  0% {
+    transform: translate(-50px, -50px) rotate(45deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(400px, 900px) rotate(45deg);
+    opacity: 0;
+  }
+}
+
 
 /* ===== Fixed Header ===== */
 header {
@@ -219,42 +256,28 @@ footer {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* Chat Bubble Above Contact Info */
-.contact-info::before {
-  content: "💬 Let's connect!";
-  display: block;
-  background: #0077ff;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-weight: bold;
-  width: fit-content;
-  animation: float 3s ease-in-out infinite;
-  margin: 0 auto 1rem auto;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-
 .social-icons {
   margin-top: 1rem;
 }
 
 .social-icons a {
-  margin-right: 1rem;
   display: inline-block;
-  transition: transform 0.15s ease;
+  width: 50px;
+  height: 50px;
+  background: #ffffff; /* optional: same color as form or page */
+  border-radius: 8px;
+  overflow: hidden;
+  margin-right: 1rem;
+}
+
+.social-icons img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .social-icons a:hover {
   transform: scale(1.15);
-}
-
-.social-icons img {
-  width: 50px;
-  height: 50px;
 }
 
 .contact-form form {
@@ -386,4 +409,85 @@ footer {
     width: 44px;
     height: 44px;
   }
+}
+
+/* ================================
+   CHAT BUBBLES (Contact Page)
+================================== */
+
+/* Left incoming bubble */
+.chat-bubble-left {
+  background: #0077ff;
+  color: white;
+  padding: 0.8rem 1.1rem;
+  border-radius: 18px;
+  max-width: 70%;
+  position: relative;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fadeIn 0.7s ease forwards;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* Little tail on LEFT */
+.chat-bubble-left::after {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 7px solid transparent;
+  border-right-color: #0077ff;
+}
+
+/* Right outgoing bubble */
+.chat-bubble-right {
+  background: #ffeb3b;
+  color: #003f7f;
+  padding: 0.7rem 1.1rem;
+  border-radius: 18px;
+  max-width: 70%;
+  position: relative;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-left: auto;
+  margin-bottom: 0.6rem;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: bubbleFade 0.7s ease forwards;
+  text-align: right;            /* ⭐ New */
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2); /* ⭐ New shadow */
+}
+
+/* Tail on RIGHT */
+.chat-bubble-right::after {
+  content: "";
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 7px solid transparent;
+  border-left-color: #ffeb3b;
+}
+
+/* Fade + slight slide animation */
+@keyframes bubbleFade {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Delays */
+.delay1 { animation-delay: 0.6s; }
+.delay2 { animation-delay: 1.2s; }
+.delay3 { animation-delay: 1.8s; }
+.delay4 { animation-delay: 2.4s; }
+
+.connect-icon {
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  align-items: center;     /* optional, for vertical centering if needed */
+  font-size: 3rem;         /* make it bigger */
+  margin-bottom: 1rem;     /* space between emoji and bubble */
 }

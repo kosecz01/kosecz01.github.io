@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+  <!-- Falling Shapes Background -->
+  <div class="falling-shapes"></div>
+
   <header>
     <h1>Zsolt Koseczky</h1>
     <nav>
@@ -31,28 +35,71 @@
   </main>
 
 <script>
-  const pic = document.getElementById("profile-pic");
-  const bubblesContainer = document.getElementById("bubbles");
-  const messages = ["Hello!", "My name is Zsolt!", "I would like to be your web developer!"];
+/* ===== PROFILE BUBBLES ===== */
+const pic = document.getElementById("profile-pic");
+const bubblesContainer = document.getElementById("bubbles");
+const messages = ["Hello!", "My name is Zsolt!", "I would like to be your web developer!"];
 
-  pic.addEventListener("click", () => {
-    pic.classList.add("clicked");
-    bubblesContainer.innerHTML = "";
+pic.addEventListener("click", () => {
+  pic.classList.add("clicked");
+  bubblesContainer.innerHTML = "";
 
-    messages.forEach((msg, index) => {
-      setTimeout(() => {
-        const bubble = document.createElement("div");
-        bubble.className = `bubble bubble-${index + 1}`;
-        bubble.textContent = msg;
-        bubblesContainer.appendChild(bubble);
-        setTimeout(() => bubble.classList.add("show"), 50);
-      }, index * 800);
-    });
+  messages.forEach((msg, index) => {
+    setTimeout(() => {
+      const bubble = document.createElement("div");
+      bubble.className = `bubble bubble-${index + 1}`;
+      bubble.textContent = msg;
+      bubblesContainer.appendChild(bubble);
+      setTimeout(() => bubble.classList.add("show"), 50);
+    }, index * 800);
   });
+});
+
+/* ===== RANDOM FALLING SHAPES ===== */
+const shapeContainer = document.querySelector(".falling-shapes");
+
+function createShape() {
+  const shape = document.createElement("div");
+  shape.classList.add("shape");
+
+  // Random size
+  const size = Math.random() * 25 + 15;
+  shape.style.width = `${size}px`;
+  shape.style.height = `${size}px`;
+
+  // Random X position
+  shape.style.left = Math.random() * window.innerWidth + "px";
+
+  // Random color
+  const colors = ["#0077ff", "#00c6ff", "#ffeb3b", "#ff9800", "#9c27b0"];
+  shape.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+  // Random animation durations
+  const fallDuration = Math.random() * 6 + 5;  // 5–11 seconds
+  const rotateDuration = Math.random() * 6 + 3; // 3–9 seconds
+
+  // Apply JS-controlled animation durations
+  shape.style.animationDuration = `${fallDuration}s, ${rotateDuration}s`;
+
+  // Remove after falling
+  setTimeout(() => shape.remove(), fallDuration * 1000);
+
+  shapeContainer.appendChild(shape);
+}
+
+// Spawn shapes at random intervals
+function spawnShapesRandomly() {
+  createShape();
+  const delay = Math.random() * 900 + 300; // 300–1200 ms
+  setTimeout(spawnShapesRandomly, delay);
+}
+
+spawnShapesRandomly();
 </script>
 
-  <footer>
-    <p>&copy; 2025 Zsolt Koseczky</p>
-  </footer>
+<footer>
+  <p>&copy; 2025 Zsolt Koseczky</p>
+</footer>
+
 </body>
 </html>
